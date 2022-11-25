@@ -1,38 +1,109 @@
 .App {
-  text-align: center;
+    width: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+header .left {
+    width: 50%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+header .right {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    width: 50%;
+    padding: 0.6em;
 }
 
-.App-link {
-  color: #61dafb;
+a {
+    color: var(--green);
+    text-decoration: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button {
+    background-color: var(--green);
+    border: 1px solid var(--cream);
+    border-radius: 1px;
+    font-family: 'SupplyMono', monospace;
+    color: var(--black);
+    font-size: 1.4em;
+    padding: 0.25em 0.3em 0.05em 0.3em;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.row .col {
+    display: flex;
+    flex-direction: column;
+}
+
+.imgWrapper {
+    margin: 4px;
+    padding: 0px;
+    width: 176px;
+    height: 150px;
+    position: relative;
+}
+
+.imgWrapper img {
+    width: 176px;
+    height: 150px;
+    border-radius: 1px;
+}
+
+.imgWrapper .tokenId {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    color: var(--cream);
+    text-shadow: 1px 1px 2px var(--black);
+    font-size: 1.2em;
+}
+
+.Drifter .DrifterImage img {
+    width: 400px;
+    height: auto;
+}
+
+.Attribute {
+    margin: 3px 12px;
+    font-size: 1.2em;
+}
+
+.Attribute .Trait {
+    margin-right: 9px;
+    color: var(--cream);
+    font-size: 0.9em;
+}
+
+.Attribute .Value {
+    font-size: 1.1em;
+    color: var(--green);
+}
+
+.Drifter .links {
+    display: flex;
+    flex-direction: row;
+}
+.Drifter .links a {
+    background-color: var(--green);
+    color: var(--black);
+    font-size: 1.6em;
+    padding: 8px 6px 4px 6px;
+    margin: 6px;
+    text-decoration: none;
+    border-bottom: 2px solid var(--black);
 }
