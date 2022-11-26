@@ -17,9 +17,16 @@ function Drifter({ tokenId }) {
     const drifter = useSelector(selectDrifter(tokenId));
     if (drifter) {
         const href = `/drifter/${tokenId}`;
+        const fastImage = `https://nfts-dataw.s3.amazonaws.com/fringe-images/${tokenId}.png`;
+        const onError = (e) => {
+            e.target.onError = null;
+            e.target.src = drifter.image;
+        };
         return (
             <div className="imgWrapper">
-                <Link to={href}><img src={drifter.image} alt={drifter.name} /></Link>
+                <Link to={href}>
+                    <img src={fastImage} alt={drifter.name} onError={onError} />
+                </Link>
                 <span className="tokenId">{tokenId}</span>
             </div>
         );
