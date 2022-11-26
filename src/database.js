@@ -13,6 +13,7 @@ const slice = createSlice({
         address: null,
         driftersById: loadLocalStorage('driftersById', {}), // {tokenId => metadata}
         walletDriftersByIndex: loadLocalStorage('walletDriftersByIndex', {}), // {wallet => [tokenId]}
+        attributeFilter: null,
     },
     reducers: {
         setHasWallet: (state, action) => {
@@ -41,6 +42,9 @@ const slice = createSlice({
             }
             state.walletDriftersByIndex[wallet] = state.walletDriftersByIndex[wallet].slice(0, length);
         },
+        setAttributeFilter: (state, action) => {
+            state.attributeFilter = action.payload;
+        },
     },
 });
 
@@ -50,6 +54,7 @@ export const setAddress = slice.actions.setAddress;
 export const setDrifter = slice.actions.setDrifter;
 export const setWalletDrifterByIndex = slice.actions.setWalletDrifterByIndex;
 export const trimWalletDrifters = slice.actions.trimWalletDrifters;
+export const setAttributeFilter = slice.actions.setAttributeFilter;
 
 export const store = configureStore({
     reducer: slice.reducer,
@@ -66,3 +71,4 @@ export const selectIsCorrectChain = state => state.isCorrectChain;
 export const selectAddress = state => state.address;
 export const selectDrifter = tokenId => state => state.driftersById[tokenId];
 export const selectWalletDrifters = wallet => state => (state.walletDriftersByIndex[wallet] || []);
+export const selectAttributeFilter = state => state.attributeFilter;

@@ -23,3 +23,7 @@ body {
     color: var(--cream);
     letter-spacing: 1.6px;
 }
+
+input {
+    font-family: 'Druk wide', sans-serif;
+}

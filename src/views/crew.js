@@ -9,13 +9,30 @@ import {
     refreshWalletDrifters,
 } from '../client.js';
 import {
+    store,
     selectWalletDrifters,
     selectDrifter,
+    setAttributeFilter,
+    selectAttributeFilter,
 } from '../database.js';
+
+function matchAttributeFilter(drifter, attributeFilter) {
+    if (!attributeFilter) {
+        return true;
+    }
+    const re = new RegExp(attributeFilter, 'i');
+    if (re.exec(drifter.tokenId.toString()) != null) {
+        return true;
+    }
+    return drifter.attributes.map(a => a.value).some(value => {
+        return (re.exec(value) != null);
+    });
+}
 
 function Drifter({ tokenId }) {
     const drifter = useSelector(selectDrifter(tokenId));
-    if (drifter) {
+    const attributeFilter = useSelector(selectAttributeFilter);
+    if (drifter && matchAttributeFilter(drifter, attributeFilter)) {
         const href = `/drifter/${tokenId}`;
         const fastImage = `https://nfts-dataw.s3.amazonaws.com/fringe-images/${tokenId}.png`;
         const onError = (e) => {
@@ -33,13 +50,33 @@ function Drifter({ tokenId }) {
     }
 }
 
-function RenderPage({ wallet }) {
+function AttributeFilter() {
+    const attributeFilter = useSelector(selectAttributeFilter);
+    const onChange = (e) => {
+        const attr = e.target.value;
+        store.dispatch(setAttributeFilter(attr));
+    };
+    return (
+        <div className="AttributeFilter">
+            <input type="text" defaultValue={attributeFilter} onChange={onChange} tabIndex="1" />
+        </div>
+    );
+}
+
+function CrewList({ wallet }) {
     const tokenIds = useSelector(selectWalletDrifters(wallet));
     return (
+        <div className="row wrap">
+            {tokenIds.slice().reverse().map(tokenId => <Drifter key={tokenId} tokenId={tokenId} />)}
+        </div>
+    );
+}
+
+function RenderPage({ wallet }) {
+    return (
         <div className="Crew">
-            <div className="row wrap">
-                {tokenIds.slice().reverse().map(tokenId => <Drifter key={tokenId} tokenId={tokenId} />)}
-            </div>
+            <AttributeFilter />
+            <CrewList wallet={wallet} />
         </div>
     );
 }
