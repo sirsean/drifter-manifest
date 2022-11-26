@@ -1,5 +1,4 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit';
-import sortBy from 'sort-by';
 
 function loadLocalStorage(key, defaultValue) {
     const raw = localStorage.getItem(key);

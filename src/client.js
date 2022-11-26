@@ -1,5 +1,4 @@
-import { ethers } from 'ethers';
-import { getProvider, loadContract } from './wallet.js';
+import { loadContract } from './wallet.js';
 import {
     store,
     setDrifter,
@@ -31,7 +30,7 @@ export async function fetchMetadata(tokenId) {
         });
 }
 
-export async function tokenIdsByOwner(address) {
+export async function refreshWalletDrifters(address) {
     let tokenIds = [];
     const balance = await balanceOf(address);
     for (let i=balance-1; i >= 0; i--) {

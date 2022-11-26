@@ -6,10 +6,7 @@ import {
 } from 'react-router-dom';
 import { Page } from './layout.js';
 import {
-    balanceOf,
-    tokenOfOwnerByIndex,
-    tokenIdsByOwner,
-    fetchMetadata,
+    refreshWalletDrifters,
 } from '../client.js';
 import {
     selectWalletDrifters,
@@ -43,7 +40,7 @@ function RenderPage({ wallet }) {
 export default function Crew() {
     const { wallet } = useParams();
     const onIsCorrect = () => {
-        tokenIdsByOwner(wallet);
+        refreshWalletDrifters(wallet);
     };
     return (
         <Page onIsCorrect={onIsCorrect}>

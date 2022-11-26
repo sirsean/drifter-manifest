@@ -36,7 +36,7 @@ function RenderPage({ tokenId }) {
                             <img src={drifter.image} alt={drifter.name} />
                         </div>
                         <div className="links">
-                            <a href={openseaHref} target="_blank">opensea</a>
+                            <a href={openseaHref} target="_blank" rel="noreferrer">opensea</a>
                         </div>
                     </div>
                     <div className="col">
